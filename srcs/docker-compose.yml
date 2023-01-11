@@ -1,0 +1,67 @@
+version : '3'
+
+services :
+  mariadb : 
+    build :
+      context : ./requirements/mariadb
+      args :
+      - DB_NAME=wordpress
+      - USER=issam
+      - USR_P=Zigolla123
+    image : mariadb_image
+    container_name : mariadb
+    restart : unless-stopped
+    ports:
+      - "3306:3306"
+    env_file : .env
+    networks:
+      - wordp
+    volumes : 
+      - 'database:/var/lib/mysql'
+  wordpress :
+    build : ./requirements/wordpress
+    image : wordpress_image
+    container_name : wordpress
+    restart : unless-stopped
+    ports:
+      - "9000:9000"
+    env_file : .env
+    depends_on :
+      - mariadb
+    networks :
+      - wordp
+    volumes :
+      - 'wordpress:/var/www/html'
+  nginx :
+    build : ./requirements/nginx
+    image : nginx_image
+    container_name : nginx
+    restart : unless-stopped
+    env_file : .env
+    depends_on :
+      - wordpress
+    ports : 
+      - '443:443'
+    networks :
+      - wordp
+    volumes :
+      - 'wordpress:/var/www/html'
+networks:
+  wordp :
+    driver : bridge
+
+volumes:
+  database :
+    driver : local
+    driver_opts:
+      o : bind
+      type : none
+      device : /Users/iel-mach/Desktop/data/db
+  wordpress :
+    driver : local
+    driver_opts: 
+      o : bind
+      type : none
+      device : /Users/iel-mach/Desktop/data/wp
+    
+   
