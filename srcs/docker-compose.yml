@@ -11,8 +11,6 @@ services :
     image : mariadb_image
     container_name : mariadb
     restart : unless-stopped
-    ports:
-      - "3306:3306"
     env_file : .env
     networks:
       - wordp
@@ -23,8 +21,6 @@ services :
     image : wordpress_image
     container_name : wordpress
     restart : unless-stopped
-    ports:
-      - "9000:9000"
     env_file : .env
     depends_on :
       - mariadb
