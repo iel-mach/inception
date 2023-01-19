@@ -6,7 +6,7 @@
 #    By: iel-mach <iel-mach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 02:27:15 by iel-mach          #+#    #+#              #
-#    Updated: 2023/01/11 16:39:58 by iel-mach         ###   ########.fr        #
+#    Updated: 2023/01/19 19:06:42 by iel-mach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RUN apt-get -y install curl
 
 RUN mkdir -p /var/www/html/
 
-COPY ./conf/script.sh /
+COPY ./tools/script.sh /
 
 COPY ./conf/wp-config.php /
 

@@ -52,12 +52,12 @@ volumes:
     driver_opts:
       o : bind
       type : none
-      device : /Users/iel-mach/Desktop/data/db
+      device : ~/Desktop/data/db
   wordpress :
     driver : local
     driver_opts: 
       o : bind
       type : none
-      device : /Users/iel-mach/Desktop/data/wp
+      device : ~/Desktop/data/wp
     
    
