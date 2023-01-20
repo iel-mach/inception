@@ -6,7 +6,7 @@
 #    By: iel-mach <iel-mach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 02:23:59 by iel-mach          #+#    #+#              #
-#    Updated: 2023/01/17 04:53:03 by iel-mach         ###   ########.fr        #
+#    Updated: 2023/01/20 19:54:32 by iel-mach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,13 @@ build :
 down :
 	docker-compose -f srcs/docker-compose.yml down
 clean : down
-	rm -rf ~/Desktop/data/wp/*
-	rm -rf ~/Desktop/data/db/*
+	sudo rm -rf ~/Desktop/data/wp/*
+	sudo rm -rf ~/Desktop/data/db/*
 	docker system prune -af
 	docker image prune -f
-	docker volume rm srcs_database
-	docker volume rm srcs_wordpress
+	docker images -q | xargs -r docker rmi
+	docker volume ls -q | xargs -r  docker volume rm
 fclean : clean
+
+re : fclean all
 	
